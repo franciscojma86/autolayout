@@ -41,14 +41,16 @@
     [self.view arrangeView:self.blueView
                     toView:self.redView
                     offset:20
-                multiplier:1.0 position:ConstraintPositionsToLead
+                multiplier:1.0
+                  position:ConstraintPositionsToLead
                      apply:YES];
     
     //Same height and width for both views
     [self.view alignView:self.blueView
                   toView:self.redView
-              dimensions:ConstraintDimensionsWidth
-                   apply:YES];
+                  offset:0.0
+              multiplier:2.0
+              dimensions:ConstraintDimensionsWidth apply:YES];
 
 
     [UIView animateWithDuration:1 animations:^{

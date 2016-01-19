@@ -89,7 +89,7 @@ typedef NS_OPTIONS(NSUInteger, ConstraintPositions)  {
 ///Align the subview to the super view edges.
 - (NSArray<NSLayoutConstraint *> *)alignSubview:(UIView *)subview
                                           edges:(ConstraintEdges)edges
-                                        apply:(BOOL)apply;
+                                          apply:(BOOL)apply;
 
 ///Align the subview to the super view edges with and offset and multiplier.
 - (NSArray<NSLayoutConstraint *> *)alignSubview:(UIView *)subview
