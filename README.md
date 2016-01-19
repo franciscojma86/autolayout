@@ -6,17 +6,17 @@ Just drag and drop the UIView+Autolayout.h and .m into your project.
 
 ##Usage
 Using UIView+Autolayout is very simple, but you must still follow the Auto Layout basics:
--Before adding any constraints, the view must be already added to a superview
--Layout constraints between 2 views must be added to a superview they have in common
--Call -layoutIfNeeded from the superview to layout the constraints and see the effects
+- Before adding any constraints, the view must be already added to a superview
+- Layout constraints between 2 views must be added to a superview they have in common
+- Call -layoutIfNeeded from the superview to layout the constraints and see the effects
 
 ####Creating a constraint
 
 There are 4 types of constraints this category can generate for you
--Edges alignment
--Centers alignment
--Dimensions alignment
--Relative positions
+- Edges alignment
+- Centers alignment
+- Dimensions alignment
+- Relative positions
 
 #####Edges alignment
 
