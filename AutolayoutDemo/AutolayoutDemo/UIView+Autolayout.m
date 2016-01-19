@@ -18,7 +18,8 @@
 }
 
 #pragma mark -Fill subview
-- (NSArray<NSLayoutConstraint *> *)fitSubview:(UIView *)subView {
+- (NSArray<NSLayoutConstraint *> *)fitSubview:(UIView *)subView
+                                        apply:(BOOL)apply {
     return [self alignView:subView
                     toView:self
                     offset:0.0
@@ -26,11 +27,13 @@
                      edges:ConstraintEdgesTop |
             ConstraintEdgesRight |
             ConstraintEdgesBottom |
-            ConstraintEdgesLeft];
+            ConstraintEdgesLeft
+                     apply:apply];
 }
 
 - (NSArray<NSLayoutConstraint *> *)fitSubview:(UIView *)subView
-                               overalloffset:(CGFloat)overalloffset {
+                                overalloffset:(CGFloat)overalloffset
+                                        apply:(BOOL)apply {
     return [self alignView:subView
                     toView:self
                     offset:overalloffset
@@ -38,12 +41,14 @@
                      edges:ConstraintEdgesTop |
             ConstraintEdgesRight |
             ConstraintEdgesBottom |
-            ConstraintEdgesLeft];
+            ConstraintEdgesLeft
+                     apply:apply];
 }
 
 - (NSArray<NSLayoutConstraint *> *)fitSubview:(UIView *)subView
-                               overalloffset:(CGFloat)overalloffset
-                                   multiplier:(CGFloat)multiplier {
+                                overalloffset:(CGFloat)overalloffset
+                                   multiplier:(CGFloat)multiplier
+                                        apply:(BOOL)apply {
     return [self alignView:subView
                     toView:self
                     offset:overalloffset
@@ -51,22 +56,26 @@
                      edges:ConstraintEdgesTop |
             ConstraintEdgesRight |
             ConstraintEdgesBottom |
-            ConstraintEdgesLeft];
+            ConstraintEdgesLeft
+                     apply:apply];
 }
 
 #pragma mark -Dimensions
 - (NSArray<NSLayoutConstraint *> *)alignView:(UIView *)view1
                                       toView:(UIView *)view2
-                                  dimensions:(ConstraintDimensions)dimensions {
+                                  dimensions:(ConstraintDimensions)dimensions
+                                       apply:(BOOL)apply {
     return [self alignView:view1
                     toView:view2
                     offset:0.0
                 multiplier:1.0
-                dimensions:dimensions];
+                dimensions:dimensions
+                     apply:apply];
 }
 
 - (NSArray<NSLayoutConstraint *> *)changeDimensions:(ConstraintDimensions)dimensions
-                                               size:(CGFloat)size {
+                                               size:(CGFloat)size
+                                              apply:(BOOL)apply {
     NSMutableArray *constraints = [NSMutableArray array];
     if (dimensions & ConstraintDimensionsWidth) {
         [constraints addObject:[NSLayoutConstraint constraintWithItem:self
@@ -86,7 +95,7 @@
                                                            multiplier:1.0
                                                              constant:size]];
     }
-    [self addConstraints:constraints];
+    if (apply) [self addConstraints:constraints];
     return constraints;
 }
 
@@ -94,7 +103,8 @@
                                       toView:(UIView *)view2
                                       offset:(CGFloat)offset
                                   multiplier:(CGFloat)multiplier
-                                  dimensions:(ConstraintDimensions)dimensions {
+                                  dimensions:(ConstraintDimensions)dimensions
+                                       apply:(BOOL)apply {
     NSMutableArray *constraints = [NSMutableArray array];
     if (dimensions & ConstraintDimensionsWidth) {
         [constraints addObject:[NSLayoutConstraint constraintWithItem:view1
@@ -114,18 +124,20 @@
                                                            multiplier:multiplier
                                                              constant:offset]];
     }
-    [self addConstraints:constraints];
+    if (apply) [self addConstraints:constraints];
     return constraints;
 }
 
 #pragma mark -Align edges
 - (NSArray<NSLayoutConstraint *> *)alignSubview:(UIView *)subview
-                                          edges:(ConstraintEdges)edges {
+                                          edges:(ConstraintEdges)edges
+                                          apply:(BOOL)apply {
     NSArray *constraints = [self alignView:subview
                                     toView:self
                                     offset:0.0
                                 multiplier:1.0
-                                     edges:edges];
+                                     edges:edges
+                                     apply:apply];
     return constraints;
 }
 
@@ -133,23 +145,27 @@
 - (NSArray<NSLayoutConstraint *> *)alignSubview:(UIView *)subview
                                          offset:(CGFloat)offset
                                      multiplier:(CGFloat)multiplier
-                                          edges:(ConstraintEdges)edges {
+                                          edges:(ConstraintEdges)edges
+                                          apply:(BOOL)apply {
     NSArray *constraints = [self alignView:subview
                                     toView:self
                                     offset:offset
                                 multiplier:multiplier
-                                     edges:edges];
+                                     edges:edges
+                                     apply:apply];
     return constraints;
 }
 
 - (NSArray<NSLayoutConstraint *> *)alignView:(UIView *)view1
                                       toView:(UIView *)view2
-                                       edges:(ConstraintEdges)edges {
+                                       edges:(ConstraintEdges)edges
+                                       apply:(BOOL)apply {
     NSArray *constraints = [self alignView:view1
                                     toView:view2
                                     offset:0.0
                                 multiplier:1.0
-                                     edges:edges];
+                                     edges:edges
+                                     apply:apply];
     return constraints;
 }
 
@@ -157,7 +173,8 @@
                                       toView:(UIView *)view2
                                       offset:(CGFloat)offset
                                   multiplier:(CGFloat)multiplier
-                                       edges:(ConstraintEdges)edges {
+                                       edges:(ConstraintEdges)edges
+                                       apply:(BOOL)apply {
     NSMutableArray *constraints = [NSMutableArray array];
     
     if (edges & ConstraintEdgesTop) {
@@ -205,7 +222,7 @@
                                                            multiplier:multiplier
                                                              constant:offset]];
     }
-    [self addConstraints:constraints];
+    if (apply) [self addConstraints:constraints];
     return constraints;
     
 }
@@ -213,40 +230,47 @@
 
 #pragma mark -Centers
 - (NSArray<NSLayoutConstraint *> *)alignSubView:(UIView *)subView
-                                        centers:(ConstraintCenters)centers {
+                                        centers:(ConstraintCenters)centers
+                                          apply:(BOOL)apply {
     return [self alignView:subView
                     toView:self
                     offset:0.0
                 multiplier:1.0
-                   centers:centers];
+                   centers:centers
+                     apply:apply];
 }
 
 - (NSArray<NSLayoutConstraint *> *)alignSubView:(UIView *)subView
                                          offset:(CGFloat)offset
                                      multiplier:(CGFloat)multiplier
-                                        centers:(ConstraintCenters)centers {
+                                        centers:(ConstraintCenters)centers
+                                          apply:(BOOL)apply {
     return [self alignView:subView
                     toView:self
                     offset:offset
                 multiplier:multiplier
-                   centers:centers];
+                   centers:centers
+                     apply:apply];
 }
 
 - (NSArray<NSLayoutConstraint *> *)alignView:(UIView *)view1
                                       toView:(UIView *)view2
-                                     centers:(ConstraintCenters)centers {
+                                     centers:(ConstraintCenters)centers
+                                       apply:(BOOL)apply {
     return [self alignView:view1
                     toView:view2
                     offset:0.0
                 multiplier:1.0
-                   centers:centers];
+                   centers:centers
+                     apply:apply];
 }
 
 - (NSArray<NSLayoutConstraint *> *)alignView:(UIView *)view1
                                       toView:(UIView *)view2
                                       offset:(CGFloat)offset
                                   multiplier:(CGFloat)multiplier
-                                     centers:(ConstraintCenters)centers {
+                                     centers:(ConstraintCenters)centers
+                                       apply:(BOOL)apply {
     NSMutableArray *constraints = [NSMutableArray array];
     if (centers & ConstraintCentersX) {
         [constraints addObject:[NSLayoutConstraint constraintWithItem:view1
@@ -266,26 +290,29 @@
                                                            multiplier:multiplier
                                                              constant:offset]];
     }
-    [self addConstraints:constraints];
+    if (apply) [self addConstraints:constraints];
     return constraints;
 }
 
 #pragma mark -Position
 - (NSArray<NSLayoutConstraint *> *)arrangeView:(UIView *)view1
                                         toView:(UIView *)view2
-                                      position:(ConstraintPositions)positions {
+                                      position:(ConstraintPositions)positions
+                                         apply:(BOOL)apply {
     return [self arrangeView:view1
                       toView:view2
                       offset:0.0
                   multiplier:1.0
-                    position:positions];
+                    position:positions
+                       apply:apply];
 }
 
 - (NSArray<NSLayoutConstraint *> *)arrangeView:(UIView *)view1
                                         toView:(UIView *)view2
                                         offset:(CGFloat)offset
                                     multiplier:(CGFloat)multiplier
-                                      position:(ConstraintPositions)positions {
+                                      position:(ConstraintPositions)positions
+                                         apply:(BOOL)apply {
     NSMutableArray *constraints = [NSMutableArray array];
     if (positions & ConstraintPositionsBelow) {
         [constraints addObject:[NSLayoutConstraint constraintWithItem:view1
@@ -323,7 +350,7 @@
                                                            multiplier:multiplier
                                                              constant:offset]];
     }
-    [self addConstraints:constraints];
+    if (apply) [self addConstraints:constraints];
     return constraints;
 }
 
