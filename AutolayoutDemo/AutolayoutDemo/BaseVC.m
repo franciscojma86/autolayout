@@ -33,4 +33,12 @@
     }
     return _redView;
 }
+
+- (UIView *)blackView {
+    if (!_blackView) {
+        _blackView = [UIView autoLayoutView];
+        [_blackView setBackgroundColor:[UIColor blackColor]];
+    }
+    return _blackView;
+}
 @end

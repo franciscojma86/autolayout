@@ -19,92 +19,51 @@
 
 #pragma mark -Fill subview
 - (NSArray<NSLayoutConstraint *> *)fitSubview:(UIView *)subView {
-    NSArray *constraints = [self alignEdges:ConstraintEdgesTop |
-                            ConstraintEdgesRight |
-                            ConstraintEdgesBottom |
-                            ConstraintEdgesLeft
-                                      view1:self
-                                      view2:subView
-                                 multiplier:1.0
-                                    padding:0];
-    return constraints;
-}
-
-- (NSArray<NSLayoutConstraint *> *)fitSubview:(UIView *)subView
-                               overallPadding:(CGFloat)overallPadding {
-    return [self alignEdges:ConstraintEdgesTop |
+    return [self alignView:subView
+                    toView:self
+                    offset:0.0
+                multiplier:1.0
+                     edges:ConstraintEdgesTop |
             ConstraintEdgesRight |
             ConstraintEdgesBottom |
-            ConstraintEdgesLeft
-                      view1:self
-                      view2:subView
-                 multiplier:1.0
-                    padding:overallPadding];
+            ConstraintEdgesLeft];
 }
 
 - (NSArray<NSLayoutConstraint *> *)fitSubview:(UIView *)subView
-                               overallPadding:(CGFloat)overallPadding
+                               overalloffset:(CGFloat)overalloffset {
+    return [self alignView:subView
+                    toView:self
+                    offset:overalloffset
+                multiplier:1.0
+                     edges:ConstraintEdgesTop |
+            ConstraintEdgesRight |
+            ConstraintEdgesBottom |
+            ConstraintEdgesLeft];
+}
+
+- (NSArray<NSLayoutConstraint *> *)fitSubview:(UIView *)subView
+                               overalloffset:(CGFloat)overalloffset
                                    multiplier:(CGFloat)multiplier {
-    return [self alignEdges:ConstraintEdgesTop |
+    return [self alignView:subView
+                    toView:self
+                    offset:overalloffset
+                multiplier:multiplier
+                     edges:ConstraintEdgesTop |
             ConstraintEdgesRight |
             ConstraintEdgesBottom |
-            ConstraintEdgesLeft
-                      view1:self
-                      view2:subView
-                 multiplier:multiplier
-                    padding:overallPadding];
+            ConstraintEdgesLeft];
 }
 
 #pragma mark -Dimensions
-- (NSArray<NSLayoutConstraint *> *)alignDimensions:(ConstraintDimensions)dimensions
-                                             view1:(UIView *)view1
-                                             view2:(UIView *)view2 {
-    return [self alignDimensions:dimensions
-                           view1:view1
-                           view2:view2
-                      multiplier:1.0
-                          offset:0.0];
+- (NSArray<NSLayoutConstraint *> *)alignView:(UIView *)view1
+                                      toView:(UIView *)view2
+                                  dimensions:(ConstraintDimensions)dimensions {
+    return [self alignView:view1
+                    toView:view2
+                    offset:0.0
+                multiplier:1.0
+                dimensions:dimensions];
 }
-
-- (NSArray<NSLayoutConstraint *> *)alignDimensions:(ConstraintDimensions)dimensions
-                                             view1:(UIView *)view1
-                                             view2:(UIView *)view2
-                                        multiplier:(CGFloat)multiplier {
-    return [self alignDimensions:dimensions
-                           view1:view1
-                           view2:view2
-                      multiplier:multiplier
-                          offset:0.0];
-}
-
-- (NSArray<NSLayoutConstraint *> *)alignDimensions:(ConstraintDimensions)dimensions
-                                             view1:(UIView *)view1
-                                             view2:(UIView *)view2
-                                        multiplier:(CGFloat)multiplier
-                                            offset:(CGFloat)offset {
-    NSMutableArray *constraints = [NSMutableArray array];
-    if (dimensions & ConstraintDimensionsWidth) {
-        [constraints addObject:[NSLayoutConstraint constraintWithItem:view1
-                                                            attribute:NSLayoutAttributeWidth
-                                                            relatedBy:NSLayoutRelationEqual
-                                                               toItem:view2
-                                                            attribute:NSLayoutAttributeWidth
-                                                           multiplier:multiplier
-                                                             constant:offset]];
-    }
-    if (dimensions & ConstraintDimensionsHeight) {
-        [constraints addObject:[NSLayoutConstraint constraintWithItem:view1
-                                                            attribute:NSLayoutAttributeHeight
-                                                            relatedBy:NSLayoutRelationEqual
-                                                               toItem:view2
-                                                            attribute:NSLayoutAttributeHeight
-                                                           multiplier:multiplier
-                                                             constant:offset]];
-    }
-    [self addConstraints:constraints];
-    return constraints;
-}
-
 
 - (NSArray<NSLayoutConstraint *> *)changeDimensions:(ConstraintDimensions)dimensions
                                                size:(CGFloat)size {
@@ -131,179 +90,163 @@
     return constraints;
 }
 
-#pragma mark -Align edges
-- (NSArray<NSLayoutConstraint *> *)alignEdges:(ConstraintEdges)edges
-                                      subView:(UIView *)subview {
-    NSArray *constraints = [self alignEdges:edges
-                                      view1:self
-                                      view2:subview
-                                 multiplier:1.0
-                                    padding:0.0];
-    return constraints;
-}
-
-- (NSArray<NSLayoutConstraint *> *)alignEdges:(ConstraintEdges)edges
-                                      subView:(UIView *)subview
-                                      padding:(CGFloat)padding {
-    NSArray *constraints = [self alignEdges:edges
-                                      view1:self
-                                      view2:subview
-                                 multiplier:1.0
-                                    padding:padding];
-    return constraints;
-}
-
-- (NSArray<NSLayoutConstraint *> *)alignEdges:(ConstraintEdges)edges
-                                      subView:(UIView *)subview
-                                      padding:(CGFloat)padding
-                                   multiplier:(CGFloat)multiplier {
-    NSArray *constraints = [self alignEdges:edges
-                                      view1:self
-                                      view2:subview
-                                 multiplier:multiplier
-                                    padding:padding];
-    return constraints;
-}
-
-- (NSArray<NSLayoutConstraint *> *)alignEdges:(ConstraintEdges)edges
-                                     fromView:(UIView *)view1
-                                       toView:(UIView *)view2 {
-    NSArray *constraints = [self alignEdges:edges
-                                      view1:view1
-                                      view2:view2
-                                 multiplier:1.0
-                                    padding:0.0];
-    return constraints;
-}
-
-- (NSArray<NSLayoutConstraint *> *)alignEdges:(ConstraintEdges)edges
-                                     fromView:(UIView *)view1
-                                       toView:(UIView *)view2
-                                      padding:(CGFloat)padding {
-    NSArray *constraints = [self alignEdges:edges
-                                      view1:view1
-                                      view2:view2
-                                 multiplier:1.0
-                                    padding:padding];
-    return constraints;
-}
-
-- (NSArray<NSLayoutConstraint *> *)alignEdges:(ConstraintEdges)edges
-                                     fromView:(UIView *)view1
-                                       toView:(UIView *)view2
-                                      padding:(CGFloat)padding
-                                   multiplier:(CGFloat)multiplier {
-    NSArray *constraints = [self alignEdges:edges
-                                      view1:view1
-                                      view2:view2
-                                 multiplier:multiplier
-                                    padding:padding];
-    return constraints;
-}
-
-#pragma mark -Centers
-- (NSArray<NSLayoutConstraint *> *)alignCenters:(ConstraintCenters)centers
-                                     forSubView:(UIView *)subView {
-    return [self alignCenters:centers
-                        view1:self
-                        view2:subView
-                   multiplier:1.0
-                       offset:0.0];
-}
-
-- (NSArray<NSLayoutConstraint *> *)alignCenters:(ConstraintCenters)centers
-                                     forSubView:(UIView *)subView
-                                         offset:(CGFloat)offset {
-    return [self alignCenters:centers
-                        view1:self
-                        view2:subView
-                   multiplier:1.0
-                       offset:offset];
-}
-
-- (NSArray<NSLayoutConstraint *> *)alignCenters:(ConstraintCenters)centers
-                                     forSubView:(UIView *)subView
-                                         offset:(CGFloat)offset
-                                     multiplier:(CGFloat)multiplier {
-    return [self alignCenters:centers
-                        view1:self
-                        view2:subView
-                   multiplier:multiplier
-                       offset:offset];
-}
-
-#pragma mark -Position
-- (NSArray<NSLayoutConstraint *> *)arrangePosition:(ConstraintPositions)positions
-                                              view:(UIView *)view1
-                                            toView:(UIView *)view2 {
-    return [self arrangePosition:positions
-                            view:view1
-                          toView:view2
-                         padding:0.0];
-}
-
-- (NSArray<NSLayoutConstraint *> *)arrangePosition:(ConstraintPositions)positions
-                                              view:(UIView *)view1
-                                            toView:(UIView *)view2
-                                           padding:(CGFloat)padding {
-    return [self arrangePosition:positions
-                            view:view1
-                          toView:view2
-                         padding:padding
-                      multiplier:1.0];
-}
-- (NSArray<NSLayoutConstraint *> *)arrangePosition:(ConstraintPositions)positions
-                                              view:(UIView *)view1
-                                            toView:(UIView *)view2
-                                           padding:(CGFloat)padding
-                                        multiplier:(CGFloat)multiplier {
+- (NSArray<NSLayoutConstraint *> *)alignView:(UIView *)view1
+                                      toView:(UIView *)view2
+                                      offset:(CGFloat)offset
+                                  multiplier:(CGFloat)multiplier
+                                  dimensions:(ConstraintDimensions)dimensions {
     NSMutableArray *constraints = [NSMutableArray array];
-    if (positions & ConstraintPositionsBelow) {
+    if (dimensions & ConstraintDimensionsWidth) {
         [constraints addObject:[NSLayoutConstraint constraintWithItem:view1
-                                                            attribute:NSLayoutAttributeTop
+                                                            attribute:NSLayoutAttributeWidth
                                                             relatedBy:NSLayoutRelationEqual
                                                                toItem:view2
-                                                            attribute:NSLayoutAttributeBottom
+                                                            attribute:NSLayoutAttributeWidth
                                                            multiplier:multiplier
-                                                             constant:padding]];
+                                                             constant:offset]];
     }
-    if (positions & ConstraintPositionsOnTop) {
+    if (dimensions & ConstraintDimensionsHeight) {
         [constraints addObject:[NSLayoutConstraint constraintWithItem:view1
-                                                            attribute:NSLayoutAttributeBottom
+                                                            attribute:NSLayoutAttributeHeight
                                                             relatedBy:NSLayoutRelationEqual
                                                                toItem:view2
-                                                            attribute:NSLayoutAttributeTop
+                                                            attribute:NSLayoutAttributeHeight
                                                            multiplier:multiplier
-                                                             constant:padding]];
-    }
-    if (positions & ConstraintPositionsToLead) {
-        [constraints addObject:[NSLayoutConstraint constraintWithItem:view1
-                                                            attribute:NSLayoutAttributeLeading
-                                                            relatedBy:NSLayoutRelationEqual
-                                                               toItem:view2
-                                                            attribute:NSLayoutAttributeTrailing
-                                                           multiplier:multiplier
-                                                             constant:padding]];
-    }
-    if (positions & ConstraintPositionsToTrail) {
-        [constraints addObject:[NSLayoutConstraint constraintWithItem:view1
-                                                            attribute:NSLayoutAttributeTrailing
-                                                            relatedBy:NSLayoutRelationEqual
-                                                               toItem:view2
-                                                            attribute:NSLayoutAttributeLeading
-                                                           multiplier:multiplier
-                                                             constant:padding]];
+                                                             constant:offset]];
     }
     [self addConstraints:constraints];
     return constraints;
 }
 
-#pragma mark -Generic constraint generation
-- (NSArray<NSLayoutConstraint *> *)alignCenters:(ConstraintCenters)centers
-                                          view1:(UIView *)view1
-                                          view2:(UIView *)view2
+#pragma mark -Align edges
+- (NSArray<NSLayoutConstraint *> *)alignSubview:(UIView *)subview
+                                          edges:(ConstraintEdges)edges {
+    NSArray *constraints = [self alignView:subview
+                                    toView:self
+                                    offset:0.0
+                                multiplier:1.0
+                                     edges:edges];
+    return constraints;
+}
+
+
+- (NSArray<NSLayoutConstraint *> *)alignSubview:(UIView *)subview
+                                         offset:(CGFloat)offset
                                      multiplier:(CGFloat)multiplier
-                                         offset:(CGFloat)offset {
+                                          edges:(ConstraintEdges)edges {
+    NSArray *constraints = [self alignView:subview
+                                    toView:self
+                                    offset:offset
+                                multiplier:multiplier
+                                     edges:edges];
+    return constraints;
+}
+
+- (NSArray<NSLayoutConstraint *> *)alignView:(UIView *)view1
+                                      toView:(UIView *)view2
+                                       edges:(ConstraintEdges)edges {
+    NSArray *constraints = [self alignView:view1
+                                    toView:view2
+                                    offset:0.0
+                                multiplier:1.0
+                                     edges:edges];
+    return constraints;
+}
+
+- (NSArray<NSLayoutConstraint *> *)alignView:(UIView *)view1
+                                      toView:(UIView *)view2
+                                      offset:(CGFloat)offset
+                                  multiplier:(CGFloat)multiplier
+                                       edges:(ConstraintEdges)edges {
+    NSMutableArray *constraints = [NSMutableArray array];
+    
+    if (edges & ConstraintEdgesTop) {
+        [constraints addObject:[NSLayoutConstraint constraintWithItem:view1
+                                                            attribute:NSLayoutAttributeTop
+                                                            relatedBy:NSLayoutRelationEqual
+                                                               toItem:view2
+                                                            attribute:NSLayoutAttributeTop
+                                                           multiplier:multiplier
+                                                             constant:offset]];
+    }
+    if (edges & ConstraintEdgesBottom) {
+        [constraints addObject:[NSLayoutConstraint constraintWithItem:view1
+                                                            attribute:NSLayoutAttributeBottom
+                                                            relatedBy:NSLayoutRelationEqual
+                                                               toItem:view2
+                                                            attribute:NSLayoutAttributeBottom
+                                                           multiplier:multiplier
+                                                             constant:-offset]];
+    }
+    if (edges & ConstraintEdgesRight) {
+        [constraints addObject:[NSLayoutConstraint constraintWithItem:view1
+                                                            attribute:NSLayoutAttributeTrailing
+                                                            relatedBy:NSLayoutRelationEqual
+                                                               toItem:view2
+                                                            attribute:NSLayoutAttributeTrailing
+                                                           multiplier:multiplier
+                                                             constant:-offset]];
+    }
+    if (edges & ConstraintEdgesLeft) {
+        [constraints addObject:[NSLayoutConstraint constraintWithItem:view1
+                                                            attribute:NSLayoutAttributeLeading
+                                                            relatedBy:NSLayoutRelationEqual
+                                                               toItem:view2
+                                                            attribute:NSLayoutAttributeLeading
+                                                           multiplier:multiplier
+                                                             constant:offset]];
+    }
+    if (edges & ConstraintEdgesBaseline) {
+        [constraints addObject:[NSLayoutConstraint constraintWithItem:view1
+                                                            attribute:NSLayoutAttributeBaseline
+                                                            relatedBy:NSLayoutRelationEqual
+                                                               toItem:view2
+                                                            attribute:NSLayoutAttributeBaseline
+                                                           multiplier:multiplier
+                                                             constant:offset]];
+    }
+    [self addConstraints:constraints];
+    return constraints;
+    
+}
+
+
+#pragma mark -Centers
+- (NSArray<NSLayoutConstraint *> *)alignSubView:(UIView *)subView
+                                        centers:(ConstraintCenters)centers {
+    return [self alignView:subView
+                    toView:self
+                    offset:0.0
+                multiplier:1.0
+                   centers:centers];
+}
+
+- (NSArray<NSLayoutConstraint *> *)alignSubView:(UIView *)subView
+                                         offset:(CGFloat)offset
+                                     multiplier:(CGFloat)multiplier
+                                        centers:(ConstraintCenters)centers {
+    return [self alignView:subView
+                    toView:self
+                    offset:offset
+                multiplier:multiplier
+                   centers:centers];
+}
+
+- (NSArray<NSLayoutConstraint *> *)alignView:(UIView *)view1
+                                      toView:(UIView *)view2
+                                     centers:(ConstraintCenters)centers {
+    return [self alignView:view1
+                    toView:view2
+                    offset:0.0
+                multiplier:1.0
+                   centers:centers];
+}
+
+- (NSArray<NSLayoutConstraint *> *)alignView:(UIView *)view1
+                                      toView:(UIView *)view2
+                                      offset:(CGFloat)offset
+                                  multiplier:(CGFloat)multiplier
+                                     centers:(ConstraintCenters)centers {
     NSMutableArray *constraints = [NSMutableArray array];
     if (centers & ConstraintCentersX) {
         [constraints addObject:[NSLayoutConstraint constraintWithItem:view1
@@ -327,64 +270,62 @@
     return constraints;
 }
 
-- (NSArray<NSLayoutConstraint *> *)alignEdges:(ConstraintEdges)edges
-                                        view1:(UIView *)view1
-                                        view2:(UIView *)view2
-                                   multiplier:(CGFloat)multiplier
-                                      padding:(CGFloat)padding {
+#pragma mark -Position
+- (NSArray<NSLayoutConstraint *> *)arrangeView:(UIView *)view1
+                                        toView:(UIView *)view2
+                                      position:(ConstraintPositions)positions {
+    return [self arrangeView:view1
+                      toView:view2
+                      offset:0.0
+                  multiplier:1.0
+                    position:positions];
+}
+
+- (NSArray<NSLayoutConstraint *> *)arrangeView:(UIView *)view1
+                                        toView:(UIView *)view2
+                                        offset:(CGFloat)offset
+                                    multiplier:(CGFloat)multiplier
+                                      position:(ConstraintPositions)positions {
     NSMutableArray *constraints = [NSMutableArray array];
-    
-    if (edges & ConstraintEdgesTop) {
+    if (positions & ConstraintPositionsBelow) {
         [constraints addObject:[NSLayoutConstraint constraintWithItem:view1
                                                             attribute:NSLayoutAttributeTop
                                                             relatedBy:NSLayoutRelationEqual
                                                                toItem:view2
+                                                            attribute:NSLayoutAttributeBottom
+                                                           multiplier:multiplier
+                                                             constant:offset]];
+    }
+    if (positions & ConstraintPositionsOnTop) {
+        [constraints addObject:[NSLayoutConstraint constraintWithItem:view1
+                                                            attribute:NSLayoutAttributeBottom
+                                                            relatedBy:NSLayoutRelationEqual
+                                                               toItem:view2
                                                             attribute:NSLayoutAttributeTop
                                                            multiplier:multiplier
-                                                             constant:-padding]];
+                                                             constant:offset]];
     }
-    if (edges & ConstraintEdgesBottom) {
-        [constraints addObject:[NSLayoutConstraint constraintWithItem:view1
-                                                            attribute:NSLayoutAttributeBottom
-                                                            relatedBy:NSLayoutRelationEqual
-                                                               toItem:view2
-                                                            attribute:NSLayoutAttributeBottom
-                                                           multiplier:multiplier
-                                                             constant:padding]];
-    }
-    if (edges & ConstraintEdgesRight) {
-        [constraints addObject:[NSLayoutConstraint constraintWithItem:view1
-                                                            attribute:NSLayoutAttributeTrailing
-                                                            relatedBy:NSLayoutRelationEqual
-                                                               toItem:view2
-                                                            attribute:NSLayoutAttributeTrailing
-                                                           multiplier:multiplier
-                                                             constant:padding]];
-    }
-    if (edges & ConstraintEdgesLeft) {
+    if (positions & ConstraintPositionsToLead) {
         [constraints addObject:[NSLayoutConstraint constraintWithItem:view1
                                                             attribute:NSLayoutAttributeLeading
                                                             relatedBy:NSLayoutRelationEqual
                                                                toItem:view2
-                                                            attribute:NSLayoutAttributeLeading
+                                                            attribute:NSLayoutAttributeTrailing
                                                            multiplier:multiplier
-                                                             constant:-padding]];
+                                                             constant:offset]];
     }
-    if (edges & ConstraintEdgesBaseline) {
+    if (positions & ConstraintPositionsToTrail) {
         [constraints addObject:[NSLayoutConstraint constraintWithItem:view1
-                                                            attribute:NSLayoutAttributeBaseline
+                                                            attribute:NSLayoutAttributeTrailing
                                                             relatedBy:NSLayoutRelationEqual
                                                                toItem:view2
-                                                            attribute:NSLayoutAttributeBaseline
+                                                            attribute:NSLayoutAttributeLeading
                                                            multiplier:multiplier
-                                                             constant:padding]];
+                                                             constant:offset]];
     }
     [self addConstraints:constraints];
     return constraints;
-    
 }
-
-
 
 @end
 

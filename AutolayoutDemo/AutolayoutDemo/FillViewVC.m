@@ -17,7 +17,7 @@
     [self.view addSubview:self.blueView];
     
     //Make the view cover the superview with a padding
-    [self.view fitSubview:self.blueView overallPadding:30];
+    [self.view fitSubview:self.blueView overalloffset:30];
     
     //Animate for more visibility
     [UIView animateWithDuration:1 animations:^{

@@ -48,118 +48,94 @@ typedef NS_OPTIONS(NSUInteger, ConstraintPositions)  {
 };
 
 #pragma mark -View creation
-///Creates a new UIView ready to be used with Auto Layout
 + (UIView *)autoLayoutView;
 
-#pragma mark - Fill subview
-///The given subview will cover the superview completely.
+#pragma mark -Fill subview
+///Constraints the subview to the size of the superview.
 - (NSArray<NSLayoutConstraint *> *)fitSubview:(UIView *)subView;
 
-///The given subview will cover the superview, with a given padding.
+///Constraints the subview to the size of the superview with an offset.
 - (NSArray<NSLayoutConstraint *> *)fitSubview:(UIView *)subView
-                               overallPadding:(CGFloat)overallPadding;
+                                overalloffset:(CGFloat)overalloffset;
 
-///The given subview will cover the superview, with a given padding and multiplier.
+///Constraints the subview to the size of the superview with an offset and a multiplier.
 - (NSArray<NSLayoutConstraint *> *)fitSubview:(UIView *)subView
-                               overallPadding:(CGFloat)overallPadding
+                                overalloffset:(CGFloat)overalloffset
                                    multiplier:(CGFloat)multiplier;
-
-#pragma mark -Edges
-///Align the given subview's edges to the superview.
-- (NSArray<NSLayoutConstraint *> *)alignEdges:(ConstraintEdges)edges
-                                      subView:(UIView *)subview;
-
-///Align the given subview's edges to the superview, with a given padding.
-- (NSArray<NSLayoutConstraint *> *)alignEdges:(ConstraintEdges)edges
-                                      subView:(UIView *)subview
-                                      padding:(CGFloat)padding;
-
-///Align the given subview's edges to the superview, with a given padding and a multiplier,
-- (NSArray<NSLayoutConstraint *> *)alignEdges:(ConstraintEdges)edges
-                                      subView:(UIView *)subview
-                                      padding:(CGFloat)padding
-                                   multiplier:(CGFloat)multiplier;
-
-///Align the two given subview's edges to the superview.
-- (NSArray<NSLayoutConstraint *> *)alignEdges:(ConstraintEdges)edges
-                                     fromView:(UIView *)view1
-                                       toView:(UIView *)view2;
-
-///Align the two given subview's edges to the superview with a given padding.
-- (NSArray<NSLayoutConstraint *> *)alignEdges:(ConstraintEdges)edges
-                                     fromView:(UIView *)view1
-                                       toView:(UIView *)view2
-                                      padding:(CGFloat)padding;
-
-///Align the two given subview's edges to the superview with a given padding and mulitplier.
-- (NSArray<NSLayoutConstraint *> *)alignEdges:(ConstraintEdges)edges
-                                     fromView:(UIView *)view1
-                                       toView:(UIView *)view2
-                                      padding:(CGFloat)padding
-                                   multiplier:(CGFloat)multiplier;
-
 #pragma mark -Dimensions
-///Give the view a size for width and/or height.
+///Aligns two views to the same width/height.
+- (NSArray<NSLayoutConstraint *> *)alignView:(UIView *)view1
+                                      toView:(UIView *)view2
+                                  dimensions:(ConstraintDimensions)dimensions;
+
+///Aligns two views to the same width/height with an offset and multiplier.
+- (NSArray<NSLayoutConstraint *> *)alignView:(UIView *)view1
+                                      toView:(UIView *)view2
+                                      offset:(CGFloat)offset
+                                  multiplier:(CGFloat)multiplier
+                                  dimensions:(ConstraintDimensions)dimensions;
+
+///Sets the width/height dimension for the view.
 - (NSArray<NSLayoutConstraint *> *)changeDimensions:(ConstraintDimensions)dimensions
                                                size:(CGFloat)size;
 
-///Make the two given subviews the same width and/or height.
-- (NSArray<NSLayoutConstraint *> *)alignDimensions:(ConstraintDimensions)dimensions
-                                             view1:(UIView *)view1
-                                             view2:(UIView *)view2;
 
-///Make the two given subviews the same width and/or height with a multiplier
-- (NSArray<NSLayoutConstraint *> *)alignDimensions:(ConstraintDimensions)dimensions
-                                             view1:(UIView *)view1
-                                             view2:(UIView *)view2
-                                        multiplier:(CGFloat)multiplier;
+#pragma mark -Align edges
+///Align the subview to the super view edges.
+- (NSArray<NSLayoutConstraint *> *)alignSubview:(UIView *)subview
+                                          edges:(ConstraintEdges)edges;
 
-///Make the two given subviews the same width and/or height with a multplier and constant offset.
-- (NSArray<NSLayoutConstraint *> *)alignDimensions:(ConstraintDimensions)dimensions
-                                             view1:(UIView *)view1
-                                             view2:(UIView *)view2
-                                        multiplier:(CGFloat)multiplier
-                                            offset:(CGFloat)offset;
-
-#pragma mark -Centers
-///Align the subview to the superview center y and/or x axis.
-- (NSArray<NSLayoutConstraint *> *)alignCenters:(ConstraintCenters)centers
-                                     forSubView:(UIView *)subView;
-
-///Align the subview to the superview center y and/or x axis with an offset.
-- (NSArray<NSLayoutConstraint *> *)alignCenters:(ConstraintCenters)centers
-                                     forSubView:(UIView *)subView
-                                         offset:(CGFloat)offset;
-
-///Align the subview to the superview center y and/or x axis with an offset and multiplier.
-- (NSArray<NSLayoutConstraint *> *)alignCenters:(ConstraintCenters)centers
-                                     forSubView:(UIView *)subView
+///Align the subview to the super view edges with and offset and multiplier.
+- (NSArray<NSLayoutConstraint *> *)alignSubview:(UIView *)subview
                                          offset:(CGFloat)offset
-                                     multiplier:(CGFloat)multiplier;
-
-///Align the two subviews center y and/or x axis with a multiplier and offset.
-- (NSArray<NSLayoutConstraint *> *)alignCenters:(ConstraintCenters)centers
-                                          view1:(UIView *)view1
-                                          view2:(UIView *)view2
                                      multiplier:(CGFloat)multiplier
-                                         offset:(CGFloat)offset;
+                                          edges:(ConstraintEdges)edges;
 
-#pragma mark -Positions
-///Position the two subviews in mutual relation.
-- (NSArray<NSLayoutConstraint *> *)arrangePosition:(ConstraintPositions)positions
-                                              view:(UIView *)view1
-                                            toView:(UIView *)view2;
+///Align a view to another view's edges.
+- (NSArray<NSLayoutConstraint *> *)alignView:(UIView *)view1
+                                      toView:(UIView *)view2
+                                       edges:(ConstraintEdges)edges;
 
-///Position the two subviews in mutual relation with a padding.
-- (NSArray<NSLayoutConstraint *> *)arrangePosition:(ConstraintPositions)positions
-                                              view:(UIView *)view1
-                                            toView:(UIView *)view2
-                                           padding:(CGFloat)padding;
+///Align a view to another view's edges with an offset and a multiplier.
+- (NSArray<NSLayoutConstraint *> *)alignView:(UIView *)view1
+                                      toView:(UIView *)view2
+                                      offset:(CGFloat)offset
+                                  multiplier:(CGFloat)multiplier
+                                       edges:(ConstraintEdges)edges;
+#pragma mark -Centers
+///Align the subview center to the superview.
+- (NSArray<NSLayoutConstraint *> *)alignSubView:(UIView *)subView
+                                        centers:(ConstraintCenters)centers;
 
-///Position the two subviews in mutual relation with a padding and multiplier.
-- (NSArray<NSLayoutConstraint *> *)arrangePosition:(ConstraintPositions)positions
-                                              view:(UIView *)view1
-                                            toView:(UIView *)view2
-                                           padding:(CGFloat)padding
-                                        multiplier:(CGFloat)multiplier;
+///Align the subview center to the superview with an offset and multiplier.
+- (NSArray<NSLayoutConstraint *> *)alignSubView:(UIView *)subView
+                                         offset:(CGFloat)offset
+                                     multiplier:(CGFloat)multiplier
+                                        centers:(ConstraintCenters)centers;
+
+///Align the subview center to the superview.
+- (NSArray<NSLayoutConstraint *> *)alignView:(UIView *)view1
+                                      toView:(UIView *)view2
+                                     centers:(ConstraintCenters)centers;
+
+///Align the subview center to the superview with and offset and multiplier.
+- (NSArray<NSLayoutConstraint *> *)alignView:(UIView *)view1
+                                      toView:(UIView *)view2
+                                      offset:(CGFloat)offset
+                                  multiplier:(CGFloat)multiplier
+                                     centers:(ConstraintCenters)centers;
+
+#pragma mark -Position
+///Position a view in relation to another view.
+- (NSArray<NSLayoutConstraint *> *)arrangeView:(UIView *)view1
+                                        toView:(UIView *)view2
+                                      position:(ConstraintPositions)positions;
+
+///Position a view in relation to another view with and offset and multiplier.
+- (NSArray<NSLayoutConstraint *> *)arrangeView:(UIView *)view1
+                                        toView:(UIView *)view2
+                                        offset:(CGFloat)offset
+                                    multiplier:(CGFloat)multiplier
+                                      position:(ConstraintPositions)positions;
+
 @end

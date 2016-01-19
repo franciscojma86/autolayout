@@ -7,8 +7,10 @@
 //
 
 #import "MenuTVC.h"
+//controllers
 #import "TwoSquaresVC.h"
 #import "FillViewVC.h"
+#import "AlignedSquaresVC.h"
 
 @interface MenuTVC ()
 
@@ -24,7 +26,8 @@ static NSString *const kCellIdentifier = @"testCell";
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.options = @[@"Fill view",
-                     @"Two squares to edges"];
+                     @"Two squares to edges",
+                     @"Aligned squares"];
 }
 
 #pragma mark -TableView Data source
@@ -52,6 +55,9 @@ static NSString *const kCellIdentifier = @"testCell";
         case 1:
             [self showTwoSquareDemo];
             break;
+        case 2:
+            [self showAlignedSquaresDemo];
+            break;
         default:
             break;
     }
@@ -68,5 +74,9 @@ static NSString *const kCellIdentifier = @"testCell";
     [self.navigationController pushViewController:controller animated:YES];
 }
 
+- (void)showAlignedSquaresDemo {
+    AlignedSquaresVC *controller = [[AlignedSquaresVC alloc]init];
+    [self.navigationController pushViewController:controller animated:YES];
+}
 
 @end

@@ -12,5 +12,6 @@
 
 @property (nonatomic,strong) UIView *blueView;
 @property (nonatomic,strong) UIView *redView;
+@property (nonatomic,strong) UIView *blackView;
 
 @end

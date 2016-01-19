@@ -21,29 +21,28 @@
     [self.view addSubview:self.redView];
     
     //Top, and sides edges aligned to super view
-    [self.view alignEdges:ConstraintEdgesLeft |
-     ConstraintEdgesTop |
-     ConstraintEdgesBottom
-                  subView:self.redView
-                  padding:20];
-    [self.view alignEdges:ConstraintEdgesRight |
-     ConstraintEdgesTop |
-     ConstraintEdgesBottom
-                  subView:self.blueView
-                  padding:20];
+    [self.view alignSubview:self.redView
+                     offset:20
+                 multiplier:1.0
+                      edges:ConstraintEdgesTop |
+     ConstraintEdgesBottom |
+     ConstraintEdgesLeft];
+    
+    [self.view alignSubview:self.blueView
+                     offset:20
+                 multiplier:1.0
+                      edges:ConstraintEdgesTop | ConstraintEdgesRight | ConstraintEdgesBottom];
     
     //Blue view leading the red
-    [self.view arrangePosition:ConstraintPositionsToLead
-                          view:self.blueView
-                        toView:self.redView
-                       padding:20];
+    [self.view arrangeView:self.blueView
+                    toView:self.redView
+                    offset:20
+                multiplier:1.0 position:ConstraintPositionsToLead];
     
     //Same height and width for both views
-    [self.view alignDimensions:ConstraintDimensionsWidth
-                         view1:self.redView
-                         view2:self.blueView
-                    multiplier:1.0
-                        offset:0.0];
+    [self.view alignView:self.blueView
+                  toView:self.redView
+              dimensions:ConstraintDimensionsWidth];
 
 
     [UIView animateWithDuration:1 animations:^{

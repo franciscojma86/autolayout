@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		97B6EE731C4DD4B800E5A597 /* AlignedSquaresVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 97B6EE721C4DD4B800E5A597 /* AlignedSquaresVC.m */; };
 		97CBB42B1C4C746500B7E1B9 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 97CBB42A1C4C746500B7E1B9 /* main.m */; };
 		97CBB42E1C4C746500B7E1B9 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 97CBB42D1C4C746500B7E1B9 /* AppDelegate.m */; };
 		97CBB4311C4C746500B7E1B9 /* MenuTVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 97CBB4301C4C746500B7E1B9 /* MenuTVC.m */; };
@@ -39,6 +40,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		97B6EE711C4DD4B800E5A597 /* AlignedSquaresVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AlignedSquaresVC.h; sourceTree = "<group>"; };
+		97B6EE721C4DD4B800E5A597 /* AlignedSquaresVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AlignedSquaresVC.m; sourceTree = "<group>"; };
 		97CBB4261C4C746500B7E1B9 /* AutolayoutDemo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = AutolayoutDemo.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		97CBB42A1C4C746500B7E1B9 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		97CBB42C1C4C746500B7E1B9 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
@@ -172,6 +175,8 @@
 				97CBB4691C4C7C3B00B7E1B9 /* FillViewVC.m */,
 				97CBB45C1C4C74A000B7E1B9 /* TwoSquaresVC.h */,
 				97CBB45D1C4C74A000B7E1B9 /* TwoSquaresVC.m */,
+				97B6EE711C4DD4B800E5A597 /* AlignedSquaresVC.h */,
+				97B6EE721C4DD4B800E5A597 /* AlignedSquaresVC.m */,
 			);
 			name = Controllers;
 			sourceTree = "<group>";
@@ -312,6 +317,7 @@
 				97CBB4611C4C74A000B7E1B9 /* BaseVC.m in Sources */,
 				97CBB42B1C4C746500B7E1B9 /* main.m in Sources */,
 				97CBB4641C4C74B100B7E1B9 /* UIView+Autolayout.m in Sources */,
+				97B6EE731C4DD4B800E5A597 /* AlignedSquaresVC.m in Sources */,
 				97CBB46A1C4C7C3B00B7E1B9 /* FillViewVC.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -538,6 +544,7 @@
 				97CBB4551C4C746500B7E1B9 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		97CBB4561C4C746500B7E1B9 /* Build configuration list for PBXNativeTarget "AutolayoutDemoTests" */ = {
 			isa = XCConfigurationList;
@@ -546,6 +553,7 @@
 				97CBB4581C4C746500B7E1B9 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		97CBB4591C4C746500B7E1B9 /* Build configuration list for PBXNativeTarget "AutolayoutDemoUITests" */ = {
 			isa = XCConfigurationList;
@@ -554,6 +562,7 @@
 				97CBB45B1C4C746500B7E1B9 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
