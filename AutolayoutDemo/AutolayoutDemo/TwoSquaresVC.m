@@ -45,12 +45,13 @@
                   position:ConstraintPositionsToLead
                      apply:YES];
     
-    //Same height and width for both views
+    //Make blue square be double the width of red queare
     [self.view alignView:self.blueView
                   toView:self.redView
                   offset:0.0
               multiplier:2.0
-              dimensions:ConstraintDimensionsWidth apply:YES];
+              dimensions:ConstraintDimensionsWidth
+                   apply:YES];
 
 
     [UIView animateWithDuration:1 animations:^{
