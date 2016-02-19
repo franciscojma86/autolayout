@@ -27,7 +27,7 @@
                       edges:ConstraintEdgesTop |
      ConstraintEdgesBottom |
      ConstraintEdgesLeft
-                      apply:YES];
+                     active:YES];
     
     [self.view alignSubview:self.blueView
                      offset:20
@@ -35,7 +35,7 @@
                       edges:ConstraintEdgesTop |
      ConstraintEdgesRight |
      ConstraintEdgesBottom
-                      apply:YES];
+                     active:YES];
     
     //Blue view leading the red
     [self.view arrangeView:self.blueView
@@ -43,7 +43,7 @@
                     offset:20
                 multiplier:1.0
                   position:ConstraintPositionsToLead
-                     apply:YES];
+                    active:YES];
     
     //Make blue square be double the width of red queare
     [self.view alignView:self.blueView
@@ -51,9 +51,9 @@
                   offset:0.0
               multiplier:2.0
               dimensions:ConstraintDimensionsWidth
-                   apply:YES];
-
-
+                  active:YES];
+    
+    
     [UIView animateWithDuration:1 animations:^{
         [self.view layoutIfNeeded];
     }];

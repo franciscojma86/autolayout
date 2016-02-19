@@ -50,27 +50,32 @@ typedef NS_OPTIONS(NSUInteger, ConstraintPositions)  {
 #pragma mark -View creation
 + (UIView *)autoLayoutView;
 
+///Activates an array of constraints
++ (void)activateConstraints:(NSArray<NSLayoutConstraint *> *)constraints;
+///Deactivates an array of constraints
++ (void)deactivateConstraints:(NSArray<NSLayoutConstraint *> *)constraints;
+
 #pragma mark -Fill subview
 ///Constraints the subview to the size of the superview.
 - (NSArray<NSLayoutConstraint *> *)fitSubview:(UIView *)subView
-                                        apply:(BOOL)apply;
+                                        active:(BOOL)active;
 
 ///Constraints the subview to the size of the superview with an offset.
 - (NSArray<NSLayoutConstraint *> *)fitSubview:(UIView *)subView
                                 overalloffset:(CGFloat)overalloffset
-                                        apply:(BOOL)apply;
+                                        active:(BOOL)active;
 
 ///Constraints the subview to the size of the superview with an offset and a multiplier.
 - (NSArray<NSLayoutConstraint *> *)fitSubview:(UIView *)subView
                                 overalloffset:(CGFloat)overalloffset
                                    multiplier:(CGFloat)multiplier
-                                        apply:(BOOL)apply;
+                                        active:(BOOL)active;
 #pragma mark -Dimensions
 ///Aligns two views to the same width/height.
 - (NSArray<NSLayoutConstraint *> *)alignView:(UIView *)view1
                                       toView:(UIView *)view2
                                   dimensions:(ConstraintDimensions)dimensions
-                                        apply:(BOOL)apply;
+                                        active:(BOOL)active;
 
 ///Aligns two views to the same width/height with an offset and multiplier.
 - (NSArray<NSLayoutConstraint *> *)alignView:(UIView *)view1
@@ -78,31 +83,31 @@ typedef NS_OPTIONS(NSUInteger, ConstraintPositions)  {
                                       offset:(CGFloat)offset
                                   multiplier:(CGFloat)multiplier
                                   dimensions:(ConstraintDimensions)dimensions
-                                        apply:(BOOL)apply;
+                                        active:(BOOL)active;
 
 ///Sets the width/height dimension for the view.
 - (NSArray<NSLayoutConstraint *> *)changeDimensions:(ConstraintDimensions)dimensions
                                                size:(CGFloat)size
-                                        apply:(BOOL)apply;
+                                        active:(BOOL)active;
 
 #pragma mark -Align edges
 ///Align the subview to the super view edges.
 - (NSArray<NSLayoutConstraint *> *)alignSubview:(UIView *)subview
                                           edges:(ConstraintEdges)edges
-                                          apply:(BOOL)apply;
+                                          active:(BOOL)active;
 
 ///Align the subview to the super view edges with and offset and multiplier.
 - (NSArray<NSLayoutConstraint *> *)alignSubview:(UIView *)subview
                                          offset:(CGFloat)offset
                                      multiplier:(CGFloat)multiplier
                                           edges:(ConstraintEdges)edges
-                                        apply:(BOOL)apply;
+                                        active:(BOOL)active;
 
 ///Align a view to another view's edges.
 - (NSArray<NSLayoutConstraint *> *)alignView:(UIView *)view1
                                       toView:(UIView *)view2
                                        edges:(ConstraintEdges)edges
-                                        apply:(BOOL)apply;
+                                        active:(BOOL)active;
 
 ///Align a view to another view's edges with an offset and a multiplier.
 - (NSArray<NSLayoutConstraint *> *)alignView:(UIView *)view1
@@ -110,25 +115,25 @@ typedef NS_OPTIONS(NSUInteger, ConstraintPositions)  {
                                       offset:(CGFloat)offset
                                   multiplier:(CGFloat)multiplier
                                        edges:(ConstraintEdges)edges
-                                        apply:(BOOL)apply;
+                                        active:(BOOL)active;
 #pragma mark -Centers
 ///Align the subview center to the superview.
 - (NSArray<NSLayoutConstraint *> *)alignSubView:(UIView *)subView
                                         centers:(ConstraintCenters)centers
-                                        apply:(BOOL)apply;
+                                        active:(BOOL)active;
 
 ///Align the subview center to the superview with an offset and multiplier.
 - (NSArray<NSLayoutConstraint *> *)alignSubView:(UIView *)subView
                                          offset:(CGFloat)offset
                                      multiplier:(CGFloat)multiplier
                                         centers:(ConstraintCenters)centers
-                                        apply:(BOOL)apply;
+                                        active:(BOOL)active;
 
 ///Align the subview center to the superview.
 - (NSArray<NSLayoutConstraint *> *)alignView:(UIView *)view1
                                       toView:(UIView *)view2
                                      centers:(ConstraintCenters)centers
-                                        apply:(BOOL)apply;
+                                        active:(BOOL)active;
 
 ///Align the subview center to the superview with and offset and multiplier.
 - (NSArray<NSLayoutConstraint *> *)alignView:(UIView *)view1
@@ -136,14 +141,14 @@ typedef NS_OPTIONS(NSUInteger, ConstraintPositions)  {
                                       offset:(CGFloat)offset
                                   multiplier:(CGFloat)multiplier
                                      centers:(ConstraintCenters)centers
-                                        apply:(BOOL)apply;
+                                        active:(BOOL)active;
 
 #pragma mark -Position
 ///Position a view in relation to another view.
 - (NSArray<NSLayoutConstraint *> *)arrangeView:(UIView *)view1
                                         toView:(UIView *)view2
                                       position:(ConstraintPositions)positions
-                                        apply:(BOOL)apply;
+                                        active:(BOOL)active;
 
 ///Position a view in relation to another view with and offset and multiplier.
 - (NSArray<NSLayoutConstraint *> *)arrangeView:(UIView *)view1
@@ -151,6 +156,6 @@ typedef NS_OPTIONS(NSUInteger, ConstraintPositions)  {
                                         offset:(CGFloat)offset
                                     multiplier:(CGFloat)multiplier
                                       position:(ConstraintPositions)positions
-                                        apply:(BOOL)apply;
+                                        active:(BOOL)active;
 
 @end

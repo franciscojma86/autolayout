@@ -20,7 +20,7 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-
+    
     //First add the views
     [self.view addSubview:self.blueView];
     [self.view addSubview:self.blackView];
@@ -30,27 +30,30 @@
     //Do it separately so we can keep a reference to the leading constraint,
     //and we can adjust it later
     self.leadingConstraints = [self.view alignSubview:self.blueView
-                                                offset:20
-                                            multiplier:1.0
-                                                 edges:ConstraintEdgesLeft
-                                                 apply:YES];
+                                               offset:20
+                                           multiplier:1.0
+                                                edges:ConstraintEdgesLeft
+                                               active:YES];
     //Generate the constraints to align the square center x to the superview
-    //but don't apply yet
+    //but don't active yet
     self.centerConstraints = [self.view alignSubView:self.blueView
                                              centers:ConstraintCentersX
-                                               apply:NO];
+                                              active:YES];
+    for (NSLayoutConstraint *constraint in self.centerConstraints) {
+        constraint.active = NO;
+    }
     
     [self.view alignSubview:self.blueView
                      offset:20
                  multiplier:1.0
                       edges:ConstraintEdgesTop
-                      apply:YES];
+                     active:YES];
     
     //Give the square a width, the height will be calculated with the rest of
     //the squares
     [self.blueView changeDimensions:ConstraintDimensionsWidth
                                size:200
-                              apply:YES];
+                             active:YES];
     
     //Postions the squares beneath each other
     [self.view arrangeView:self.redView
@@ -58,34 +61,34 @@
                     offset:20
                 multiplier:1.0
                   position:ConstraintPositionsBelow
-                     apply:YES];
-
+                    active:YES];
+    
     //Align the leading edges
     [self.view alignView:self.redView
-                   toView:self.blueView
-                    edges:ConstraintEdgesLeft
-                   apply:YES];
+                  toView:self.blueView
+                   edges:ConstraintEdgesLeft
+                  active:YES];
     
     //Make them same width and height
     [self.view alignView:self.redView
                   toView:self.blueView
               dimensions:ConstraintDimensionsWidth |
      ConstraintDimensionsHeight
-                   apply:YES];
+                  active:YES];
     
     //Attach the bottom square to the bottom of the superview
     [self.view alignSubview:self.redView
                      offset:20
                  multiplier:1.0
                       edges:ConstraintEdgesBottom
-                      apply:YES];
-
+                     active:YES];
+    
     //Execute the constraints so it starts in the leading position
     [self.view layoutIfNeeded];
     
     //Remove the leading constraints and add the center constraints
-    [self.view removeConstraints:self.leadingConstraints];
-    [self.view addConstraints:self.centerConstraints];
+    [UIView deactivateConstraints:self.leadingConstraints];
+    [UIView activateConstraints:self.centerConstraints];
     
     //Animate the change of position, moving all squares by just
     //changing the blue square leading constrain
