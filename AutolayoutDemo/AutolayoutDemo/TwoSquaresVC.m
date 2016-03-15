@@ -7,7 +7,7 @@
 //
 
 #import "TwoSquaresVC.h"
-#import "UIView+Autolayout.h"
+#import "UIView+FMAutolayout.h"
 
 
 @implementation TwoSquaresVC

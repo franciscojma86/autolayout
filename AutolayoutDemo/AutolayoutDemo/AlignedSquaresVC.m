@@ -7,7 +7,7 @@
 //
 
 #import "AlignedSquaresVC.h"
-#import "UIView+Autolayout.h"
+#import "UIView+FMAutolayout.h"
 
 @interface AlignedSquaresVC ()
 
